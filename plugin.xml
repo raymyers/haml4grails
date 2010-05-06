@@ -1,0 +1,22 @@
+<plugin name='haml' version='0.1' grailsVersion='1.2.2 &gt; *'>
+  <author>Ray Myers</author>
+  <authorEmail>ray.myers@gmail.com</authorEmail>
+  <title>haml</title>
+  <description>\
+Haml support for grails, based on JHaml.
+http://github.com/raymyers/JHaml
+</description>
+  <documentation>http://grails.org/plugin/haml</documentation>
+  <resources>
+    <resource>BuildConfig</resource>
+    <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
+    <resource>haml.MainController</resource>
+  </resources>
+  <dependencies>
+    <resolvers>
+      <resolver type='grailsPlugins' name='grailsPlugins' />
+    </resolvers>
+  </dependencies>
+  <behavior />
+</plugin>
