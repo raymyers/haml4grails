@@ -6,7 +6,7 @@ Grails haml support
 
 First install the plugin...
 
-    grails install plugin haml
+    grails install plugin path/to/grails-haml-0.1.zip
 
 Then add the following to your grails-app/config/spring/resources.groovy:
 
