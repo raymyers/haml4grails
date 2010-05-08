@@ -25,6 +25,9 @@ class HamlGrailsPlugin {
     def title = "haml"
     def description = '''\\
 Haml support for grails, based on JHaml.
+
+http://github.com/raymyers/haml4grails
+
 http://github.com/raymyers/JHaml
 '''
 

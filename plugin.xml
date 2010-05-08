@@ -4,6 +4,9 @@
   <title>haml</title>
   <description>\
 Haml support for grails, based on JHaml.
+
+http://github.com/raymyers/haml4grails
+
 http://github.com/raymyers/JHaml
 </description>
   <documentation>http://grails.org/plugin/haml</documentation>
