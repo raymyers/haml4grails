@@ -1,6 +1,6 @@
 # haml4grails
 
-Grails haml support
+Grails haml support, using [JHaml](http://www.github.com/raymyers/JHaml).
 
 ## Using
 
