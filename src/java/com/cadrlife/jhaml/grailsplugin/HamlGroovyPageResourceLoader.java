@@ -2,49 +2,45 @@ package com.cadrlife.jhaml.grailsplugin;
 
 import grails.util.PluginBuildSettings;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
 import org.codehaus.groovy.grails.web.pages.GroovyPageResourceLoader;
 import org.springframework.core.io.Resource;
 
-import com.cadrlife.jhaml.JHaml;
+import com.cadrlife.jhaml.JHamlBatchConverter;
 
+/*
+ * Wraps GroovyPageResourceLoader, generating the requested gsp from a haml file
+ * when one exists. 
+ */
 public class HamlGroovyPageResourceLoader extends GroovyPageResourceLoader {
 
 	private GroovyPageResourceLoader baseResourceLoader = new GroovyPageResourceLoader();
+	private JHamlBatchConverter batchConverter = new JHamlBatchConverter();
+	{
+		batchConverter.setTargetExtenstion("gsp");
+	}
 	
 	@Override
 	public Resource getResource(String location) {
-		System.err.println(location);
 		if (isGspView(location)) {
-			Resource hamlR = getBaseResourceLoader().getResource(pathToHaml(location));
-			if (hamlR.exists()) {
-				Resource gspR = getBaseResourceLoader().getResource(pathForGeneratedGsp(location));
+			Resource hamlResource = getBaseResourceLoader().getResource(pathToHaml(location));
+			if (hamlResource.exists()) {
 				try {
-					String haml = FileUtils.readFileToString(hamlR.getFile());
-					String gsp = new JHaml().parse(haml);
-					new File(gspR.getFile().getParent()).mkdirs();
-					FileUtils.writeStringToFile(gspR.getFile(), gsp);
+					batchConverter.convertAllInPath(hamlResource.getFile());
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-				return getBaseResourceLoader().getResource(pathForGeneratedGsp(location));
 			}
 		}
 		return getBaseResourceLoader().getResource(location);
 	}
 	
-	private String pathForGeneratedGsp(String location) {
-		return location.replaceFirst("/views/", "/views-generated/");
-	}
-
-	private String pathToHaml(String location) {
+	protected String pathToHaml(String location) {
 		return location.replaceFirst(".gsp$", ".haml");
 	}
 
-	private boolean isGspView(String location) {
+	protected boolean isGspView(String location) {
 		return location.endsWith(".gsp") && location.contains("/views/");
 	}
 	
@@ -62,7 +58,7 @@ public class HamlGroovyPageResourceLoader extends GroovyPageResourceLoader {
 		this.baseResourceLoader = baseResourceLoader;
 	}
 	
-	private GroovyPageResourceLoader getBaseResourceLoader() {
+	protected GroovyPageResourceLoader getBaseResourceLoader() {
 		return baseResourceLoader;
 	}
 

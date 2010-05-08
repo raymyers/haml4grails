@@ -9,6 +9,12 @@ class HamlGrailsPlugin {
     def grailsVersion = "1.2.2 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
+    
+    // Can't get onChange to do anything useful.
+    //def watchedResources = "file:./grails-app/views/**/*.haml"
+                     
+    
+    //def loadAfter = ['groovy-pages']
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
             "grails-app/views/error.gsp"
@@ -30,17 +36,16 @@ http://github.com/raymyers/JHaml
     }
 
     def doWithSpring = {
-    		boolean developmentMode = !application.warDeployed
-    		def viewsDir = application.config.grails.gsp.view.dir
-    		if (developmentMode) {
-    			resourceLoader(HamlGroovyPageResourceLoader) {
-    				baseResource = new FileSystemResource(".")
-    			//pluginSettings = new PluginBuildSettings(BuildSettingsHolder.settings)
-    		}
-        }
+		/* Seems to only work when included in the resources.groovy of the app.
+		 * Maybe a "loadAfter" def above would fix that. -- RM 
+		 groovyPageResourceLoader(com.cadrlife.jhaml.grailsplugin.HamlGroovyPageResourceLoader) {
+			baseResource = new FileSystemResource(".")
+		}
+		*/
     }
 
     def doWithDynamicMethods = { ctx ->
+
     }
 
     def doWithApplicationContext = { applicationContext ->
@@ -51,7 +56,11 @@ http://github.com/raymyers/JHaml
         // TODO Implement code that is executed when any artefact that this plugin is
         // watching is modified and reloaded. The event contains: event.source,
         // event.application, event.manager, event.ctx, and event.plugin.
-    	
+	    /* Not working so far
+    	def batchConverter = new com.cadrlife.jhaml.JHamlBatchConverter()
+		batchConverter.setTargetExtenstion("gsp")
+		batchConverter.convertAllInPath(event.source.getFile())
+		*/
     }
 
     def onConfigChange = { event ->
