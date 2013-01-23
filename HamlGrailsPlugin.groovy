@@ -4,9 +4,9 @@ import com.cadrlife.jhaml.grailsplugin.HamlGroovyPageResourceLoader;
 
 class HamlGrailsPlugin {
     // the plugin version
-    def version = "0.3"
+    def version = "0.4"
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "1.3.3 > *"
+    def grailsVersion = "1.3.8 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
     
@@ -56,7 +56,7 @@ http://github.com/raymyers/JHaml
     }
 
     def onChange = { event ->
-        // TODO Implement code that is executed when any artefact that this plugin is
+        // TODO Implement code that is executed when any artifact that this plugin is
         // watching is modified and reloaded. The event contains: event.source,
         // event.application, event.manager, event.ctx, and event.plugin.
 	    /* Not working so far

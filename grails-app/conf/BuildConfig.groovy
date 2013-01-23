@@ -12,8 +12,11 @@ grails.project.dependency.resolution = {
     repositories {        
         grailsPlugins()
         grailsHome()
-
-        // uncomment the below to enable remote dependency resolution
+		mavenCentral()
+		
+		//mavenRepo "https://raw.github.com/raymyers/raymyers-mvn-repo/master/releases"
+		//mavenRepo "http://scala-tools.org/repo-releases"
+		// uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
         //mavenCentral()
@@ -25,7 +28,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        // runtime 'mysql:mysql-connector-java:5.1.5'
+        //runtime 'com.cadrlife.jhaml:jhaml:0.1.5'
     }
 
 }
